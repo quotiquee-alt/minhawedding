@@ -9,108 +9,135 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@300;400&family=Noto+Naskh+Arabic:wght@400;500&family=Noto+Sans+Arabic:wght@300;400&display=swap" rel="stylesheet">
 <style>
+  /* PHOTO SLOTS: drop real photos into an "images" folder with these names and they replace the placeholders.
+     hero.jpg  bridal.jpg  evening.jpg  bridesmaids.jpg  accessories.jpg  studio.jpg */
   :root{
-    --paper:#F5F5F3; --ink:#262626; --stone:#68655F; --rule:#D8D7D2; --deep:#2E2D2B;
-    --t1:#E6E3DD; --t2:#D5D2CB; --t3:#C4C1BA; --t4:#DDDBD6; --t5:#CBC8C0;
+    --paper:#FAFAF8; --ink:#1B1B1B; --stone:#65635E; --rule:#DEDDD8; --band:#F0EFEB; --deep:#1F1F1E;
     --serif:"Bodoni Moda","Times New Roman",serif; --sans:"Jost",system-ui,sans-serif;
-    --pad:clamp(20px,5vw,64px);
+    --pad:clamp(20px,4.5vw,56px);
   }
   :root[lang="ar"]{ --serif:"Noto Naskh Arabic","Times New Roman",serif; --sans:"Noto Sans Arabic",system-ui,sans-serif; }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--paper);color:var(--ink);font:300 1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-  :root[lang="ar"] body{line-height:1.9}
+  body{margin:0;background:var(--paper);color:var(--ink);font:300 1rem/1.75 var(--sans);-webkit-font-smoothing:antialiased}
+  :root[lang="ar"] body{line-height:1.95}
   a{color:inherit}
   :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   .wrap{padding-inline:var(--pad)}
   h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0}
+  .ph{background-image:var(--img),repeating-linear-gradient(103deg,rgba(255,255,255,.07) 0 70px,rgba(0,0,0,.012) 70px 160px),radial-gradient(120% 90% at 28% 12%,rgba(255,255,255,.6),transparent 62%),linear-gradient(172deg,var(--a),var(--b));background-size:cover;background-position:center;--a:#E9E6E0;--b:#CFCBC3}
 
   .notice{background:var(--deep);color:#E9E8E4;font-size:.8125rem;padding:8px var(--pad);text-align:center}
 
+  /* header: centred wordmark like the reference houses */
   header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
-  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
-  .mark{font-family:"Bodoni Moda",serif;font-size:1.375rem;text-decoration:none;direction:ltr}
-  nav.links{display:none;gap:32px;font-size:.9375rem}
-  nav.links a{text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+  .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:68px;gap:12px}
+  .mark{font-family:"Bodoni Moda",serif;font-size:1.75rem;line-height:1;text-decoration:none;direction:ltr;text-align:center;letter-spacing:.02em}
+  .mark small{display:block;font:300 .6875rem/1.4 var(--sans);letter-spacing:.14em;margin-top:6px;color:var(--stone);white-space:nowrap}
+  :root[lang="ar"] .mark small{letter-spacing:0;font-size:.75rem}
+  nav.links{display:none;gap:30px;font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase}
+  :root[lang="ar"] nav.links{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  nav.links a{text-decoration:none;padding:8px 0;border-bottom:1px solid transparent}
   nav.links a:hover{border-color:var(--ink)}
-  @media(min-width:760px){nav.links{display:flex}}
-  .tools{display:flex;align-items:center;gap:20px}
-  .lang{background:none;border:0;font:inherit;font-size:.9375rem;cursor:pointer;min-height:44px;padding:0 4px;text-decoration:underline;text-underline-offset:4px}
+  @media(min-width:900px){nav.links{display:flex}}
+  .tools{display:flex;justify-content:flex-end;align-items:center;gap:22px;font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase}
+  :root[lang="ar"] .tools{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  .tools a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+  .lang{background:none;border:0;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;min-height:44px;padding:0 2px;color:inherit}
+  .bar .lang-left{justify-self:start}
+  @media(max-width:899px){.bar{grid-template-columns:1fr auto 1fr}.tools .book-link{display:none}.lang-left{display:none}.tools{justify-content:flex-start;order:-1}.bar{direction:ltr}}
 
   /* hero */
-  .hero{position:relative;min-height:calc(100svh - 100px);min-height:calc(100dvh - 100px);display:grid;align-items:end;background:linear-gradient(165deg,#EAE7E1 0%,#D2CFC8 100%);overflow:hidden}
-  .hero .ph-note{position:absolute;inset-block-start:20px;inset-inline-end:var(--pad);font-size:.8125rem;color:var(--stone)}
-  .hero-in{padding:0 var(--pad) clamp(28px,6vw,64px)}
-  .word{font-family:"Bodoni Moda",serif;font-weight:400;font-size:clamp(5rem,26vw,17rem);line-height:.82;letter-spacing:-.03em;margin:0;direction:ltr;text-align:start;animation:rise 1.4s cubic-bezier(.2,.7,.2,1) both}
-  .sub{margin:18px 0 0;font-size:clamp(1rem,2.2vw,1.25rem);max-width:34ch}
-  .cta-row{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:28px;align-items:center}
-  .btn{display:inline-flex;align-items:center;min-height:48px;padding:0 28px;background:var(--ink);color:var(--paper);text-decoration:none;font-size:.9375rem;border:1px solid var(--ink);cursor:pointer;font-family:inherit}
-  .btn:hover{background:transparent;color:var(--ink)}
-  .link{font-size:.9375rem;text-underline-offset:5px}
-  @keyframes rise{from{opacity:0;transform:translateY(22px);letter-spacing:.02em}to{opacity:1;transform:none;letter-spacing:-.03em}}
+  .hero{position:relative;min-height:min(82svh,820px);min-height:min(82dvh,820px);display:flex;align-items:flex-end;--img:url(images/hero.jpg);--a:#ECE9E3;--b:#C9C5BC;overflow:hidden;isolation:isolate}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:var(--img),repeating-linear-gradient(103deg,rgba(255,255,255,.07) 0 70px,rgba(0,0,0,.012) 70px 160px),radial-gradient(120% 90% at 28% 12%,rgba(255,255,255,.6),transparent 62%),linear-gradient(172deg,var(--a),var(--b));background-size:cover;background-position:center;animation:settle 2.4s cubic-bezier(.2,.7,.2,1) both}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(20,20,20,.55),rgba(20,20,20,0) 55%)}
+  .hero-in{padding:0 var(--pad) clamp(28px,5vw,64px);color:#fff;max-width:760px}
+  .hero h1{font-size:clamp(2.25rem,6.2vw,4.75rem);line-height:1.04;letter-spacing:-.01em;animation:fade 1.4s .5s ease both}
+  :root[lang="ar"] .hero h1{line-height:1.4;letter-spacing:0}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:26px;align-items:center;animation:fade 1.4s .8s ease both}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 30px;background:#fff;color:var(--ink);text-decoration:none;font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid #fff;cursor:pointer;font-family:inherit}
+  :root[lang="ar"] .btn{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  .btn:hover{background:transparent;color:#fff}
+  .btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn.dark:hover{background:transparent;color:var(--ink)}
+  .link{font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;text-underline-offset:6px}
+  :root[lang="ar"] .link{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  @keyframes settle{from{transform:scale(1.05)}to{transform:none}}
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-  section{padding-block:clamp(64px,10vw,140px)}
-  .statement{max-width:1100px}
-  .statement p{font-family:var(--serif);font-size:clamp(1.75rem,4.6vw,3.5rem);line-height:1.2;margin:0;max-width:24ch}
-  :root[lang="ar"] .statement p{line-height:1.6}
+  section{padding-block:clamp(64px,9vw,128px)}
+  .statement p{font-family:var(--serif);font-size:clamp(1.625rem,3.6vw,2.75rem);line-height:1.28;margin:0 auto;max-width:28ch;text-align:center}
+  :root[lang="ar"] .statement p{line-height:1.7}
+  h2.sec{font-size:clamp(1.5rem,2.6vw,2rem);text-align:center;margin-bottom:clamp(28px,4vw,48px)}
 
-  /* collections */
-  .coll{display:grid;gap:32px}
-  @media(min-width:900px){.coll{grid-template-columns:1.15fr .85fr;gap:72px;align-items:start}}
-  .coll h2,.look h2,.book h2,.steps h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:28px}
-  .rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
-  .rows button{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:16px;background:none;border:0;border-bottom:1px solid var(--rule);padding:22px 0;cursor:pointer;color:var(--ink);text-align:start;font-family:var(--serif);font-size:clamp(1.75rem,4.4vw,3.25rem);line-height:1.1}
-  .rows button span{font-family:var(--sans);font-size:.875rem;color:var(--stone)}
-  .rows button[aria-pressed="true"]{padding-inline-start:18px}
-  .rows button{transition:padding .35s ease,opacity .2s}
-  .rows:has(button:hover) button:not(:hover):not(:focus-visible){opacity:.45}
-  .preview{position:relative;aspect-ratio:4/5;background:var(--t1);transition:background .5s ease;display:flex;align-items:flex-end;padding:20px}
-  @media(min-width:900px){.preview{position:sticky;top:96px}}
-  .preview small{font-size:.8125rem;color:var(--stone)}
+  /* collections: large editorial tiles with captions underneath */
+  .tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 14px}
+  @media(min-width:900px){.tiles{grid-template-columns:repeat(4,1fr);gap:24px}}
+  .tile a{display:block;text-decoration:none}
+  .tile .ph{aspect-ratio:3/4;transition:filter .5s ease}
+  .tile a:hover .ph{filter:brightness(.94)}
+  .tile h3{font-size:1.25rem;margin:16px 0 2px}
+  .tile span{font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);border-bottom:1px solid var(--rule)}
+  :root[lang="ar"] .tile span{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  .t1{--img:url(images/bridal.jpg);--a:#EEEBE5;--b:#D6D2CA}
+  .t2{--img:url(images/evening.jpg);--a:#DAD6CF;--b:#B9B4AB}
+  .t3{--img:url(images/bridesmaids.jpg);--a:#E4E1DB;--b:#C8C4BB}
+  .t4{--img:url(images/accessories.jpg);--a:#F0EEE9;--b:#D9D5CD}
 
-  /* lookbook */
-  .look-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  @media(min-width:900px){.look-grid{grid-template-columns:repeat(12,1fr);gap:20px}}
-  .frame{background:var(--t2);display:flex;align-items:flex-end;padding:14px;font-size:.8125rem;color:var(--stone)}
-  .f1{aspect-ratio:3/4;background:var(--t1)}.f2{aspect-ratio:3/4;background:var(--t3)}
-  .f3{aspect-ratio:1/1;background:var(--t4);grid-column:1/-1}.f4{aspect-ratio:3/4;background:var(--t5)}.f5{aspect-ratio:3/4;background:var(--t2)}
-  @media(min-width:900px){
-    .f1{grid-column:1/5;aspect-ratio:3/4}
-    .f2{grid-column:5/9;aspect-ratio:3/4;margin-top:72px}
-    .f3{grid-column:9/13;aspect-ratio:3/4}
-    .f4{grid-column:3/7;aspect-ratio:4/5}
-    .f5{grid-column:8/12;aspect-ratio:4/5;margin-top:56px}
-  }
+  /* studio feature: image beside text */
+  .feature{background:var(--band)}
+  .feature-in{display:grid;gap:36px;align-items:center}
+  @media(min-width:900px){.feature-in{grid-template-columns:1fr 1fr;gap:96px}}
+  .feature .ph{aspect-ratio:4/5;--img:url(images/studio.jpg);--a:#E6E2DB;--b:#C5C0B6}
+  .feature h2{font-size:clamp(1.75rem,3.4vw,2.75rem);line-height:1.15;margin-bottom:20px}
+  :root[lang="ar"] .feature h2{line-height:1.5}
+  .feature p{max-width:44ch;color:var(--stone);margin:0 0 28px}
+  .feature .cta-row{animation:none;margin-top:0}
+  .feature .link{color:var(--ink)}
 
-  /* fitting steps: a real sequence */
-  .steps{background:#EDECE9}
-  .steps ol{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule)}
+  /* fitting steps: a true sequence */
+  .steps ol{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--rule)}
   .steps li{display:grid;grid-template-columns:44px 1fr;gap:8px 16px;padding:26px 0;border-bottom:1px solid var(--rule)}
-  @media(min-width:900px){.steps ol{grid-template-columns:repeat(3,1fr);border-top:0}.steps li{display:block;padding:0 32px 0 0;border:0;border-top:1px solid var(--ink);padding-top:22px;margin-inline-end:32px}}
-  .steps .n{font-family:"Bodoni Moda",serif;font-size:1.25rem;color:var(--stone)}
+  @media(min-width:900px){.steps ol{grid-template-columns:repeat(3,1fr);gap:48px;border-top:0}.steps li{display:block;padding:22px 0 0;border-bottom:0;border-top:1px solid var(--ink)}}
+  .steps .n{font-family:"Bodoni Moda",serif;font-size:1.125rem;color:var(--stone)}
   .steps h3{font-size:1.5rem;margin-bottom:8px}
   .steps p{margin:0;color:var(--stone);max-width:36ch}
 
   /* booking */
+  .book{background:var(--band)}
   .book-grid{display:grid;gap:56px}
   @media(min-width:900px){.book-grid{grid-template-columns:1fr 1fr;gap:96px}}
+  .book h2{font-size:clamp(1.75rem,3vw,2.25rem);margin-bottom:28px}
   form{display:grid;gap:22px;max-width:520px}
   label{display:grid;gap:6px;font-size:.9375rem;color:var(--stone)}
   input,select,textarea{font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:10px 0;min-height:48px;width:100%}
   textarea{min-height:96px;resize:vertical}
   input:focus-visible,select:focus-visible,textarea:focus-visible{outline:0;border-bottom-width:2px}
-  #msg{margin:0;min-height:1.5em;font-size:.9375rem}
-  dl{margin:0;display:grid;gap:22px}
-  dt{font-size:.875rem;color:var(--stone)}
-  dd{margin:2px 0 0;font-size:1.0625rem}
+  .msg{margin:0;min-height:1.5em;font-size:.9375rem}
+  dl{margin:0;display:grid;gap:24px;align-content:start}
+  dt{font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;color:var(--stone)}
+  :root[lang="ar"] dt{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  dd{margin:4px 0 0;font-size:1.0625rem}
 
-  footer{background:var(--deep);color:#E4E3DF;padding:48px var(--pad) 40px;font-size:.875rem}
-  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
-  footer p{margin:0 0 6px;max-width:60ch}
-  footer .mark{color:#fff;font-size:1.75rem}
-  .dim{color:#B5B3AD}
+  .note{text-align:center}
+  .note h2{font-size:clamp(1.5rem,2.6vw,2rem);margin-bottom:10px}
+  .note p{margin:0 auto 24px;color:var(--stone);max-width:40ch}
+  .nform{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .nform input{flex:1 1 220px;min-width:0}
 
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+  footer{background:var(--deep);color:#E4E3DF;padding:56px var(--pad) 36px;font-size:.9375rem}
+  .cols{display:grid;gap:32px;grid-template-columns:1fr}
+  @media(min-width:760px){.cols{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+  footer .mark{color:#fff;font-size:1.75rem;text-align:start}
+  footer .mark small{color:#B7B5AF}
+  footer h4{margin:0 0 12px;font:400 .8125rem var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#B7B5AF}
+  :root[lang="ar"] footer h4{letter-spacing:0;text-transform:none;font-size:.9375rem}
+  footer p{margin:0 0 6px}
+  footer a{text-decoration:none}
+  .dim{color:#B7B5AF}
+  .legal{border-top:1px solid #3A3A38;margin-top:40px;padding-top:20px;font-size:.8125rem;color:#B7B5AF}
+
+  @media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -118,23 +145,23 @@
 
 <header class="top">
   <div class="wrap bar">
-    <a class="mark" href="#top">Minha</a>
-    <nav class="links" aria-label="Main">
+    <nav class="links lang-left" aria-label="Main">
       <a href="#collections" data-t="nav1"></a>
-      <a href="#lookbook" data-t="nav2"></a>
+      <a href="#studio" data-t="nav2"></a>
       <a href="#fitting" data-t="nav3"></a>
-      <a href="#book" data-t="nav4"></a>
     </nav>
-    <div class="tools"><button class="lang" id="langBtn" type="button" aria-label="Switch language"></button></div>
+    <a class="mark" href="#top" aria-label="Minha">Minha<small data-t="tag"></small></a>
+    <div class="tools">
+      <a class="book-link" href="#book" data-t="nav4"></a>
+      <button class="lang" id="langBtn" type="button" aria-label="Switch language"></button>
+    </div>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero" style="padding:0">
-    <span class="ph-note" data-t="photoHero"></span>
+  <section class="hero ph" style="padding:0" role="img" data-ta="heroAlt">
     <div class="hero-in">
-      <h1 class="word">Minha</h1>
-      <p class="sub" data-t="sub"></p>
+      <h1 data-t="h1"></h1>
       <div class="cta-row">
         <a class="btn" href="#book" data-t="cta"></a>
         <a class="link" href="#collections" data-t="viewColl"></a>
@@ -146,38 +173,41 @@
     <p data-t="statement"></p>
   </section>
 
-  <section class="wrap coll" id="collections">
-    <div>
-      <h2 data-t="collTitle"></h2>
-      <ul class="rows" id="rows"></ul>
-    </div>
-    <div class="preview" id="preview" aria-live="polite"><small id="previewCap"></small></div>
-  </section>
-
-  <section class="wrap look" id="lookbook" style="padding-top:0">
-    <h2 data-t="lookTitle"></h2>
-    <div class="look-grid">
-      <div class="frame f1" data-t="photo"></div>
-      <div class="frame f2" data-t="photo"></div>
-      <div class="frame f3" data-t="photo"></div>
-      <div class="frame f4" data-t="photo"></div>
-      <div class="frame f5" data-t="photo"></div>
+  <section class="wrap" id="collections" style="padding-top:0">
+    <h2 class="sec" data-t="collTitle"></h2>
+    <div class="tiles">
+      <div class="tile"><a href="#book"><div class="ph t1" role="img" data-ta="altBridal"></div><h3 data-t="c1"></h3><span data-t="enq"></span></a></div>
+      <div class="tile"><a href="#book"><div class="ph t2" role="img" data-ta="altEvening"></div><h3 data-t="c2"></h3><span data-t="enq"></span></a></div>
+      <div class="tile"><a href="#book"><div class="ph t3" role="img" data-ta="altMaids"></div><h3 data-t="c3"></h3><span data-t="enq"></span></a></div>
+      <div class="tile"><a href="#book"><div class="ph t4" role="img" data-ta="altAcc"></div><h3 data-t="c4"></h3><span data-t="enq"></span></a></div>
     </div>
   </section>
 
-  <section class="steps" id="fitting">
-    <div class="wrap">
-      <h2 data-t="stepsTitle"></h2>
-      <ol>
-        <li><span class="n">1</span><div><h3 data-t="s1h"></h3><p data-t="s1p"></p></div></li>
-        <li><span class="n">2</span><div><h3 data-t="s2h"></h3><p data-t="s2p"></p></div></li>
-        <li><span class="n">3</span><div><h3 data-t="s3h"></h3><p data-t="s3p"></p></div></li>
-      </ol>
+  <section class="feature" id="studio">
+    <div class="wrap feature-in">
+      <div class="ph" role="img" data-ta="altStudio"></div>
+      <div>
+        <h2 data-t="fh"></h2>
+        <p data-t="fp"></p>
+        <div class="cta-row">
+          <a class="btn dark" href="#book" data-t="cta"></a>
+          <a class="link" href="#visit" data-t="visit"></a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="wrap book" id="book">
-    <div class="book-grid">
+  <section class="wrap steps" id="fitting">
+    <h2 class="sec" data-t="stepsTitle"></h2>
+    <ol>
+      <li><span class="n">1</span><div><h3 data-t="s1h"></h3><p data-t="s1p"></p></div></li>
+      <li><span class="n">2</span><div><h3 data-t="s2h"></h3><p data-t="s2p"></p></div></li>
+      <li><span class="n">3</span><div><h3 data-t="s3h"></h3><p data-t="s3p"></p></div></li>
+    </ol>
+  </section>
+
+  <section class="book" id="book">
+    <div class="wrap book-grid">
       <div>
         <h2 data-t="bookTitle"></h2>
         <form id="form" novalidate>
@@ -193,11 +223,11 @@
             </select>
           </label>
           <label><span data-t="fNote"></span><textarea id="fNote" name="note"></textarea></label>
-          <div><button class="btn" type="submit" data-t="send"></button></div>
-          <p id="msg" role="status"></p>
+          <div><button class="btn dark" type="submit" data-t="send"></button></div>
+          <p class="msg" id="msg" role="status"></p>
         </form>
       </div>
-      <dl>
+      <dl id="visit">
         <div><dt data-t="dAddr"></dt><dd data-t="vAddr"></dd></div>
         <div><dt data-t="dHours"></dt><dd data-t="vHours"></dd></div>
         <div><dt data-t="dWa"></dt><dd data-t="vWa"></dd></div>
@@ -205,18 +235,28 @@
       </dl>
     </div>
   </section>
+
+  <section class="wrap note">
+    <h2 data-t="nTitle"></h2>
+    <p data-t="nText"></p>
+    <form class="nform" id="nform" novalidate>
+      <input id="nEmail" type="email" autocomplete="email" data-ta="nLabel">
+      <button class="btn dark" type="submit" data-t="nBtn"></button>
+    </form>
+    <p class="msg" id="nmsg" role="status" style="margin-top:14px"></p>
+  </section>
 </main>
 
 <footer>
-  <div class="row">
-    <div>
-      <div class="mark">Minha</div>
-      <p class="dim" data-t="foot"></p>
-    </div>
-    <div>
-      <p data-t="cr"></p>
-      <p class="dim" data-t="credit"></p>
-    </div>
+  <div class="cols">
+    <div><div class="mark">Minha<small data-t="tag"></small></div></div>
+    <div><h4 data-t="dAddr"></h4><p data-t="vAddr"></p><p class="dim" data-t="vHours"></p></div>
+    <div><h4 data-t="fContact"></h4><p data-t="vWa"></p><p data-t="vIg"></p></div>
+    <div><h4 data-t="fInfo"></h4><p><a href="#fitting" data-t="nav3"></a></p><p><a href="#book" data-t="nav4"></a></p></div>
+  </div>
+  <div class="legal">
+    <p data-t="cr"></p>
+    <p data-t="credit"></p>
   </div>
 </footer>
 
@@ -225,13 +265,20 @@
   var T = {
     en:{
       notice:"Concept demo. Sample text and placeholder images. Not the official Minha website.",
-      nav1:"Collections", nav2:"Lookbook", nav3:"Fittings", nav4:"Book",
-      sub:"Bridal and Fashion Studio, Doha.",
+      tag:"Bridal and Fashion Studio",
+      nav1:"Collections", nav2:"The studio", nav3:"Fittings", nav4:"Book",
+      h1:"Bridal gowns and occasion wear",
       cta:"Book a consultation", viewColl:"View collections",
-      photoHero:"Placeholder for hero photo", photo:"Photo",
+      heroAlt:"Placeholder for a hero photograph",
       statement:"Gowns and occasion wear, with a private fitting for every bride.",
       collTitle:"Collections",
-      lookTitle:"Lookbook",
+      c1:"Bridal gowns", c2:"Evening wear", c3:"Bridesmaids", c4:"Veils and accessories", enq:"Enquire",
+      altBridal:"Placeholder for a bridal gown photograph", altEvening:"Placeholder for an evening wear photograph",
+      altMaids:"Placeholder for a bridesmaid dress photograph", altAcc:"Placeholder for a veil and accessories photograph",
+      altStudio:"Placeholder for a studio photograph",
+      fh:"A private studio in Doha",
+      fp:"Every visit is a booked appointment, so your fitting is unhurried and your gowns are ready when you arrive.",
+      visit:"Visit the studio",
       stepsTitle:"How a fitting works",
       s1h:"Consultation", s1p:"Tell us the date, the venue and the feeling you want. We pick a few gowns to try.",
       s2h:"Fittings", s2p:"Try the gowns on in private. Adjustments are planned around your date.",
@@ -246,20 +293,29 @@
       dHours:"Hours", vHours:"Opening hours to be confirmed",
       dWa:"WhatsApp", vWa:"+974 0000 0000",
       dIg:"Instagram", vIg:"@minha (to be confirmed)",
-      foot:"Bridal and Fashion Studio, Doha.",
+      nTitle:"Notes from the studio", nText:"New arrivals and appointment dates, a few times a year.",
+      nLabel:"Email address", nBtn:"Subscribe", nDemo:"Demo only. Nothing is subscribed yet.", nNeed:"Enter a valid email address.",
+      fContact:"Contact", fInfo:"Info",
       cr:"Commercial Register no.: pending",
       credit:"Concept demo designed by Gumball. Replace all sample text and photos before any real use.",
       lang:"العربية"
     },
     ar:{
       notice:"نموذج تصميم تجريبي. النصوص والصور مؤقتة، وليس الموقع الرسمي لمنها.",
-      nav1:"المجموعات", nav2:"المعرض", nav3:"القياس", nav4:"احجزي",
-      sub:"استوديو للعرائس والأزياء في الدوحة.",
+      tag:"استوديو العرائس والأزياء",
+      nav1:"المجموعات", nav2:"الاستوديو", nav3:"القياس", nav4:"احجزي",
+      h1:"فساتين الزفاف وأزياء المناسبات",
       cta:"احجزي استشارة", viewColl:"تصفحي المجموعات",
-      photoHero:"مكان صورة الغلاف", photo:"صورة",
+      heroAlt:"مكان صورة الغلاف",
       statement:"فساتين زفاف وأزياء مناسبات، مع موعد قياس خاص لكل عروس.",
       collTitle:"المجموعات",
-      lookTitle:"المعرض",
+      c1:"فساتين الزفاف", c2:"فساتين السهرة", c3:"وصيفات العروس", c4:"الطرحات والإكسسوارات", enq:"استفسري",
+      altBridal:"مكان صورة فستان زفاف", altEvening:"مكان صورة فستان سهرة",
+      altMaids:"مكان صورة فستان وصيفة", altAcc:"مكان صورة طرحة وإكسسوارات",
+      altStudio:"مكان صورة الاستوديو",
+      fh:"استوديو خاص في الدوحة",
+      fp:"كل زيارة بموعد مسبق، فيكون القياس بلا استعجال وتجدين فساتينك جاهزة عند وصولك.",
+      visit:"زوري الاستوديو",
       stepsTitle:"كيف يتم موعد القياس",
       s1h:"الاستشارة", s1p:"أخبرينا بالتاريخ والمكان والإحساس الذي تريدينه، ونختار لك عدة فساتين لتجربتها.",
       s2h:"القياس", s2p:"جربي الفساتين في أجواء خاصة، وتُرتّب التعديلات حسب موعد مناسبتك.",
@@ -274,48 +330,25 @@
       dHours:"ساعات العمل", vHours:"ساعات العمل ستُحدد لاحقًا",
       dWa:"واتساب", vWa:"+974 0000 0000",
       dIg:"إنستغرام", vIg:"@minha (سيُحدد لاحقًا)",
-      foot:"استوديو للعرائس والأزياء في الدوحة.",
+      nTitle:"رسائل من الاستوديو", nText:"وصول التشكيلات الجديدة ومواعيد الحجز، عدة مرات في السنة.",
+      nLabel:"البريد الإلكتروني", nBtn:"اشتركي", nDemo:"نموذج تجريبي فقط. لم يتم الاشتراك.", nNeed:"أدخلي بريدًا إلكترونيًا صحيحًا.",
+      fContact:"التواصل", fInfo:"معلومات",
       cr:"رقم السجل التجاري: قيد الإضافة",
       credit:"نموذج تصميم تجريبي من Gumball. يجب استبدال كل النصوص والصور قبل أي استخدام فعلي.",
       lang:"English"
     }
   };
-  var COLL = [
-    {en:"Bridal gowns", ar:"فساتين الزفاف", ne:"Collection", na:"المجموعة", c:"#E6E3DD"},
-    {en:"Evening wear", ar:"فساتين السهرة", ne:"Collection", na:"المجموعة", c:"#D5D2CB"},
-    {en:"Bridesmaids", ar:"وصيفات العروس", ne:"Collection", na:"المجموعة", c:"#C4C1BA"},
-    {en:"Veils and accessories", ar:"الطرحات والإكسسوارات", ne:"Collection", na:"المجموعة", c:"#DDDBD6"}
-  ];
-  var lang = "en", sel = 0;
+  var lang = "en";
   function $(id){return document.getElementById(id)}
   function t(k){return T[lang][k]}
-
-  function renderRows(){
-    var ul = $("rows"); ul.innerHTML = "";
-    COLL.forEach(function(c,i){
-      var li = document.createElement("li");
-      var b = document.createElement("button");
-      b.type = "button"; b.setAttribute("aria-pressed", i === sel ? "true" : "false");
-      b.innerHTML = c[lang] + "<span>" + (lang==="ar" ? c.na : c.ne) + "</span>";
-      function pick(){ sel = i; paintPreview(); Array.prototype.forEach.call(ul.querySelectorAll("button"), function(x,j){ x.setAttribute("aria-pressed", j===i ? "true":"false"); }); }
-      b.addEventListener("mouseenter", pick); b.addEventListener("focus", pick); b.addEventListener("click", pick);
-      li.appendChild(b); ul.appendChild(li);
-    });
-    paintPreview();
-  }
-  function paintPreview(){
-    var c = COLL[sel];
-    $("preview").style.background = c.c;
-    $("previewCap").textContent = t("photo") + ": " + c[lang];
-  }
 
   function applyLang(){
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     Array.prototype.forEach.call(document.querySelectorAll("[data-t]"), function(el){ el.textContent = t(el.getAttribute("data-t")); });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-ta]"), function(el){ el.setAttribute("aria-label", t(el.getAttribute("data-ta"))); });
     $("langBtn").textContent = t("lang");
-    $("msg").textContent = "";
-    renderRows();
+    $("msg").textContent = ""; $("nmsg").textContent = "";
     try{ localStorage.setItem("minha-lang", lang); }catch(e){}
   }
 
@@ -324,6 +357,11 @@
     e.preventDefault();
     var ok = $("fName").value.trim() && $("fPhone").value.trim();
     $("msg").textContent = ok ? t("sentDemo") : t("needFields");
+  });
+  $("nform").addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = $("nEmail").value.trim();
+    $("nmsg").textContent = /^\S+@\S+\.\S+$/.test(v) ? t("nDemo") : t("nNeed");
   });
 
   try{ var s = localStorage.getItem("minha-lang"); if(s === "ar" || s === "en") lang = s; }catch(e){}
