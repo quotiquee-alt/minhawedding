@@ -64,7 +64,8 @@
   .menu{position:fixed;inset:0;z-index:35;background:var(--paper);padding:120px var(--pad) 40px;display:flex;flex-direction:column;gap:6px;opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s}
   .menu.open{opacity:1;visibility:visible;transform:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
   .menu a{font-family:var(--serif);font-size:2rem;text-decoration:none;padding:12px 0;border-bottom:1px solid var(--rule)}
-  .menu .btn{margin-top:28px;font-family:var(--sans)}
+  .menu a.btn{margin-top:28px;font-family:var(--sans);font-size:.8125rem;padding:0 30px;border-bottom:1px solid var(--ink);color:#fff}
+  .menu a.btn:hover{color:var(--ink)}
   @media(min-width:900px){.menu{display:none}}
 
   /* buttons */
@@ -73,14 +74,14 @@
   :root[dir="rtl"] .btn::before{transform:translateX(101%)}
   .btn>*{position:relative;z-index:1}
   .btn{isolation:isolate}
-  .btn:hover::before,.btn:focus-visible::before{transform:none}
-  .btn:hover{color:#fff;border-color:var(--ink)}
+  .btn:hover::before,.btn:focus-visible::before,:root[dir="rtl"] .btn:hover::before,:root[dir="rtl"] .btn:focus-visible::before{transform:none}
+  .btn:hover,.btn:focus-visible{color:#fff;border-color:var(--ink)}
   .btn:active{transform:scale(.98)}
   .btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
   .btn.dark::before{background:#fff}
-  .btn.dark:hover{color:var(--ink)}
+  .btn.dark:hover,.btn.dark:focus-visible{color:var(--ink)}
   .btn.line{background:transparent;color:var(--ink);border-color:var(--ink)}
-  .btn.line:hover{color:#fff}
+  .btn.line:hover,.btn.line:focus-visible{color:#fff}
   .btn[disabled],.btn[aria-busy="true"]{pointer-events:none;opacity:.75}
   .spin{width:16px;height:16px;border:2px solid currentColor;border-inline-end-color:transparent;border-radius:50%;animation:spin .7s linear infinite;display:none}
   .btn[aria-busy="true"] .spin{display:inline-block}
@@ -675,7 +676,8 @@
     renderSummary();
     var btn = $("submitBtn");
     btn.setAttribute("aria-busy","true"); $("submitLabel").textContent = t("sending");
-    var win = window.open($("waSend").href, "_blank", "noopener");
+    var win = window.open($("waSend").href, "_blank");
+    if(win){ try{ win.opener = null; }catch(err){} }
     setTimeout(function(){
       btn.removeAttribute("aria-busy"); $("submitLabel").textContent = t("send");
       $("blocked").classList.toggle("show", !win);
